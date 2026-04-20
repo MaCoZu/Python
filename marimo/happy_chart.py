@@ -121,10 +121,12 @@ def _(happy_hdi):
 
 @app.cell
 def _(happy_gni_n):
-    happy_gni_n.groupby("World region").agg({
-        "HDI": ["std", "mean"],
-        "GNI pc": ["min", "max", "mean"],
-    })
+    happy_gni_n.groupby("World region").agg(
+        {
+            "HDI": ["std", "mean"],
+            "GNI pc": ["min", "max", "mean"],
+        }
+    )
     return
 
 
@@ -296,8 +298,7 @@ def _(happy_spi_2021_2):
         toggle=False,
     )
     chart = (
-        alt
-        .Chart(happy_spi_2021_2)
+        alt.Chart(happy_spi_2021_2)
         .transform_fold(column_options, as_=["column", "value"])
         .transform_filter("datum.value > 0")
         .transform_filter(select_var)
