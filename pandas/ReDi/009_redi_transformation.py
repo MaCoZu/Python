@@ -147,7 +147,6 @@ def _(df):
 def _(df, pd):
     # apply - apply a function along an axis of the DataFrame
 
-
     def weighted_average(row):
         "Calculate a weighted average of math scores, giving more weight to the second term if it's below 7."
         if pd.isna(row["grade_math_t2"]):
@@ -158,7 +157,6 @@ def _(df, pd):
         else:
             return (row["grade_math_t1"] + row["grade_math_t2"]) / 2
 
-
     df["weighted_math_score"] = df.apply(weighted_average, axis=1)
     df[["avg_math_score", "weighted_math_score"]]
     return
@@ -168,9 +166,7 @@ def _(df, pd):
 def _(df):
     df.groupby("gender")["grade_math_t1"].mean()
 
-
     df.groupby("gender")["grade_math_t1"].agg(["min", "max", "mean"])
-
 
     df.groupby("gender").agg({"grade_math_t1": ["median", "max"], "age": ["min", "std"]})
     return
@@ -238,7 +234,6 @@ def _(df):
 def _(df, sns):
     import matplotlib.pyplot as plt
 
-
     def plot_scatter(df):
         dfc = df[df["grade_math_t2"] <= 10]
         # define a function for recurring tasks
@@ -255,7 +250,6 @@ def _(df, sns):
         plt.title("Math Grade Comparison")
         plt.tight_layout()
         plt.show()
-
 
     plot_scatter(
         df

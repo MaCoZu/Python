@@ -125,16 +125,18 @@ def scrape_happy_planet_index(year=2021):
         change = float(change_match.group(1)) if change_match else None
 
         if country_name and hpi_score is not None:
-            results.append({
-                "year": year,
-                "rank": rank,
-                "country": country_name,
-                "life_expectancy": life_exp,
-                "wellbeing": wellbeing,
-                "carbon_footprint": carbon,
-                "hpi_score": hpi_score,
-                "change": change,
-            })
+            results.append(
+                {
+                    "year": year,
+                    "rank": rank,
+                    "country": country_name,
+                    "life_expectancy": life_exp,
+                    "wellbeing": wellbeing,
+                    "carbon_footprint": carbon,
+                    "hpi_score": hpi_score,
+                    "change": change,
+                }
+            )
 
     results.sort(key=lambda x: x["rank"])
     return results
