@@ -1,0 +1,273 @@
+{
+  "version": "1",
+  "metadata": {
+    "marimo_version": "0.20.4",
+    "script_metadata_hash": null
+  },
+  "cells": [
+    {
+      "id": "Hbol",
+      "code_hash": "c1b7b1d18b5ff786fb8c4d2ef4e0138a",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "MJUe",
+      "code_hash": "8720fe0b1eec8cccc754069bf5b3786b",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "vblA",
+      "code_hash": "329c9c7253daef1a4edc6cbaf83af109",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "bkHC",
+      "code_hash": "bb1e6ce520d181316c3ba0bf1131a4b3",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<marimo-ui-element object-id='bkHC-0' random-id='908736f6-3a07-aa39-d5dc-b9764abca6a4'><marimo-table data-initial-value='[]' data-label='null' data-data='&quot;[{&#92;&quot;iso3&#92;&quot;:&#92;&quot;AFG&#92;&quot;,&#92;&quot;country&#92;&quot;:&#92;&quot;Afghanistan&#92;&quot;,&#92;&quot;hdicode&#92;&quot;:&#92;&quot;Low&#92;&quot;,&#92;&quot;region&#92;&quot;:&#92;&quot;SA&#92;&quot;,&#92;&quot;hdi_rank_2022&#92;&quot;:182.0,&#92;&quot;year&#92;&quot;:2021,&#92;&quot;hdi&#92;&quot;:0.473,&#92;&quot;pop_total&#92;&quot;:40.099462},{&#92;&quot;iso3&#92;&quot;:&#92;&quot;ALB&#92;&quot;,&#92;&quot;country&#92;&quot;:&#92;&quot;Albania&#92;&quot;,&#92;&quot;hdicode&#92;&quot;:&#92;&quot;High&#92;&quot;,&#92;&quot;region&#92;&quot;:&#92;&quot;ECA&#92;&quot;,&#92;&quot;hdi_rank_2022&#92;&quot;:74.0,&#92;&quot;year&#92;&quot;:2021,&#92;&quot;hdi&#92;&quot;:0.785,&#92;&quot;pop_total&#92;&quot;:2.85471},{&#92;&quot;iso3&#92;&quot;:&#92;&quot;DZA&#92;&quot;,&#92;&quot;country&#92;&quot;:&#92;&quot;Algeria&#92;&quot;,&#92;&quot;hdicode&#92;&quot;:&#92;&quot;High&#92;&quot;,&#92;&quot;region&#92;&quot;:&#92;&quot;AS&#92;&quot;,&#92;&quot;hdi_rank_2022&#92;&quot;:93.0,&#92;&quot;year&#92;&quot;:2021,&#92;&quot;hdi&#92;&quot;:0.74,&#92;&quot;pop_total&#92;&quot;:44.1779685},{&#92;&quot;iso3&#92;&quot;:&#92;&quot;AND&#92;&quot;,&#92;&quot;country&#92;&quot;:&#92;&quot;Andorra&#92;&quot;,&#92;&quot;hdicode&#92;&quot;:&#92;&quot;Very High&#92;&quot;,&#92;&quot;region&#92;&quot;:NaN,&#92;&quot;hdi_rank_2022&#92;&quot;:35.0,&#92;&quot;year&#92;&quot;:2021,&#92;&quot;hdi&#92;&quot;:0.855,&#92;&quot;pop_total&#92;&quot;:0.079034},{&#92;&quot;iso3&#92;&quot;:&#92;&quot;AGO&#92;&quot;,&#92;&quot;country&#92;&quot;:&#92;&quot;Angola&#92;&quot;,&#92;&quot;hdicode&#92;&quot;:&#92;&quot;Medium&#92;&quot;,&#92;&quot;region&#92;&quot;:&#92;&quot;SSA&#92;&quot;,&#92;&quot;hdi_rank_2022&#92;&quot;:150.0,&#92;&quot;year&#92;&quot;:2021,&#92;&quot;hdi&#92;&quot;:0.59,&#92;&quot;pop_total&#92;&quot;:34.5037735},{&#92;&quot;iso3&#92;&quot;:&#92;&quot;ATG&#92;&quot;,&#92;&quot;country&#92;&quot;:&#92;&quot;Antigua and Barbuda&#92;&quot;,&#92;&quot;hdicode&#92;&quot;:&#92;&quot;Very High&#92;&quot;,&#92;&quot;region&#92;&quot;:&#92;&quot;LAC&#92;&quot;,&#92;&quot;hdi_rank_2022&#92;&quot;:54.0,&#92;&quot;year&#92;&quot;:2021,&#92;&quot;hdi&#92;&quot;:0.819,&#92;&quot;pop_total&#92;&quot;:0.0932195},{&#92;&quot;iso3&#92;&quot;:&#92;&quot;ARG&#92;&quot;,&#92;&quot;country&#92;&quot;:&#92;&quot;Argentina&#92;&quot;,&#92;&quot;hdicode&#92;&quot;:&#92;&quot;Very High&#92;&quot;,&#92;&quot;region&#92;&quot;:&#92;&quot;LAC&#92;&quot;,&#92;&quot;hdi_rank_2022&#92;&quot;:48.0,&#92;&quot;year&#92;&quot;:2021,&#92;&quot;hdi&#92;&quot;:0.844,&#92;&quot;pop_total&#92;&quot;:45.27678},{&#92;&quot;iso3&#92;&quot;:&#92;&quot;ARM&#92;&quot;,&#92;&quot;country&#92;&quot;:&#92;&quot;Armenia&#92;&quot;,&#92;&quot;hdicode&#92;&quot;:&#92;&quot;High&#92;&quot;,&#92;&quot;region&#92;&quot;:&#92;&quot;ECA&#92;&quot;,&#92;&quot;hdi_rank_2022&#92;&quot;:76.0,&#92;&quot;year&#92;&quot;:2021,&#92;&quot;hdi&#92;&quot;:0.774,&#92;&quot;pop_total&#92;&quot;:2.7909735},{&#92;&quot;iso3&#92;&quot;:&#92;&quot;AUS&#92;&quot;,&#92;&quot;country&#92;&quot;:&#92;&quot;Australia&#92;&quot;,&#92;&quot;hdicode&#92;&quot;:&#92;&quot;Very High&#92;&quot;,&#92;&quot;region&#92;&quot;:NaN,&#92;&quot;hdi_rank_2022&#92;&quot;:10.0,&#92;&quot;year&#92;&quot;:2021,&#92;&quot;hdi&#92;&quot;:0.949,&#92;&quot;pop_total&#92;&quot;:25.921089},{&#92;&quot;iso3&#92;&quot;:&#92;&quot;AUT&#92;&quot;,&#92;&quot;country&#92;&quot;:&#92;&quot;Austria&#92;&quot;,&#92;&quot;hdicode&#92;&quot;:&#92;&quot;Very High&#92;&quot;,&#92;&quot;region&#92;&quot;:NaN,&#92;&quot;hdi_rank_2022&#92;&quot;:22.0,&#92;&quot;year&#92;&quot;:2021,&#92;&quot;hdi&#92;&quot;:0.92,&#92;&quot;pop_total&#92;&quot;:8.922082}]&quot;' data-total-rows='206' data-total-columns='8' data-max-columns='50' data-banner-text='&quot;&quot;' data-pagination='true' data-page-size='10' data-field-types='[[&quot;iso3&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;country&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;hdicode&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;region&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;hdi_rank_2022&quot;,[&quot;number&quot;,&quot;float64&quot;]],[&quot;year&quot;,[&quot;integer&quot;,&quot;int64&quot;]],[&quot;hdi&quot;,[&quot;number&quot;,&quot;float64&quot;]],[&quot;pop_total&quot;,[&quot;number&quot;,&quot;float64&quot;]]]' data-show-filters='true' data-show-download='true' data-show-column-summaries='true' data-show-data-types='true' data-show-page-size-selector='true' data-show-column-explorer='true' data-show-chart-builder='true' data-row-headers='[]' data-has-stable-row-id='false' data-lazy='false' data-preload='false' data-download-file-name='&quot;df&quot;'></marimo-table></marimo-ui-element>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "lEQa",
+      "code_hash": "9ec867933e602d49f67a63464e09aeff",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "PKri",
+      "code_hash": "4deb6d6ee4ff9b7d0ffc387a80b4deb2",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "Xref",
+      "code_hash": "7ac5014e918c7e508a603c22be3143d6",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<pre class='text-xs'>Index([&#x27;Country&#x27;, &#x27;Code&#x27;, &#x27;Year&#x27;, &#x27;Happiness Score&#x27;, &#x27;GNI pc&#x27;, &#x27;GDP pc&#x27;,\n       &#x27;Population&#x27;, &#x27;World region&#x27;],\n      dtype=&#x27;str&#x27;)</pre>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "SFPL",
+      "code_hash": "fb91c36c47be2e34fa50b4998fe17e72",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "BYtC",
+      "code_hash": "e2bb7d49af603baa6992f8a3212fcd24",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<pre class='text-xs'>Index([&#x27;Code&#x27;, &#x27;Country&#x27;, &#x27;HDICode&#x27;, &#x27;Region&#x27;, &#x27;hdi_rank_2022&#x27;, &#x27;Year&#x27;, &#x27;HDI&#x27;,\n       &#x27;PopTotal&#x27;],\n      dtype=&#x27;str&#x27;)</pre>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "qpEc",
+      "code_hash": null,
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "RGSE",
+      "code_hash": "242b3b58ff7d5c7b15731cb601c2f92b",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<marimo-ui-element object-id='RGSE-0' random-id='ce291e05-1db3-20f3-4369-c5529d603923'><marimo-table data-initial-value='[]' data-label='null' data-data='&quot;[{&#92;&quot;Code&#92;&quot;:&#92;&quot;AFG&#92;&quot;,&#92;&quot;Country&#92;&quot;:&#92;&quot;Afghanistan&#92;&quot;,&#92;&quot;HDICode&#92;&quot;:&#92;&quot;Low&#92;&quot;,&#92;&quot;Region&#92;&quot;:&#92;&quot;SA&#92;&quot;,&#92;&quot;hdi_rank_2022&#92;&quot;:182.0,&#92;&quot;Year&#92;&quot;:2011,&#92;&quot;HDI&#92;&quot;:0.457,&#92;&quot;PopTotal&#92;&quot;:29.249157,&#92;&quot;Happiness Score&#92;&quot;:4.258,&#92;&quot;GNI pc&#92;&quot;:NaN,&#92;&quot;GDP pc&#92;&quot;:2757.0525,&#92;&quot;Population&#92;&quot;:29347708.0,&#92;&quot;World region&#92;&quot;:&#92;&quot;Asia&#92;&quot;},{&#92;&quot;Code&#92;&quot;:&#92;&quot;ALB&#92;&quot;,&#92;&quot;Country&#92;&quot;:&#92;&quot;Albania&#92;&quot;,&#92;&quot;HDICode&#92;&quot;:&#92;&quot;High&#92;&quot;,&#92;&quot;Region&#92;&quot;:&#92;&quot;ECA&#92;&quot;,&#92;&quot;hdi_rank_2022&#92;&quot;:74.0,&#92;&quot;Year&#92;&quot;:2011,&#92;&quot;HDI&#92;&quot;:0.779,&#92;&quot;PopTotal&#92;&quot;:2.900654,&#92;&quot;Happiness Score&#92;&quot;:5.134,&#92;&quot;GNI pc&#92;&quot;:11936.705,&#92;&quot;GDP pc&#92;&quot;:12153.114,&#92;&quot;Population&#92;&quot;:2911499.0,&#92;&quot;World region&#92;&quot;:&#92;&quot;Europe&#92;&quot;},{&#92;&quot;Code&#92;&quot;:&#92;&quot;DZA&#92;&quot;,&#92;&quot;Country&#92;&quot;:&#92;&quot;Algeria&#92;&quot;,&#92;&quot;HDICode&#92;&quot;:&#92;&quot;High&#92;&quot;,&#92;&quot;Region&#92;&quot;:&#92;&quot;AS&#92;&quot;,&#92;&quot;hdi_rank_2022&#92;&quot;:93.0,&#92;&quot;Year&#92;&quot;:2011,&#92;&quot;HDI&#92;&quot;:0.725,&#92;&quot;PopTotal&#92;&quot;:36.5435415,&#92;&quot;Happiness Score&#92;&quot;:5.368,&#92;&quot;GNI pc&#92;&quot;:16082.684,&#92;&quot;GDP pc&#92;&quot;:14641.964,&#92;&quot;Population&#92;&quot;:36903374.0,&#92;&quot;World region&#92;&quot;:&#92;&quot;Africa&#92;&quot;},{&#92;&quot;Code&#92;&quot;:&#92;&quot;AGO&#92;&quot;,&#92;&quot;Country&#92;&quot;:&#92;&quot;Angola&#92;&quot;,&#92;&quot;HDICode&#92;&quot;:&#92;&quot;Medium&#92;&quot;,&#92;&quot;Region&#92;&quot;:&#92;&quot;SSA&#92;&quot;,&#92;&quot;hdi_rank_2022&#92;&quot;:150.0,&#92;&quot;Year&#92;&quot;:2011,&#92;&quot;HDI&#92;&quot;:0.533,&#92;&quot;PopTotal&#92;&quot;:24.2591115,&#92;&quot;Happiness Score&#92;&quot;:4.178,&#92;&quot;GNI pc&#92;&quot;:11621.377,&#92;&quot;GDP pc&#92;&quot;:11037.639,&#92;&quot;Population&#92;&quot;:24218358.0,&#92;&quot;World region&#92;&quot;:&#92;&quot;Africa&#92;&quot;},{&#92;&quot;Code&#92;&quot;:&#92;&quot;ARG&#92;&quot;,&#92;&quot;Country&#92;&quot;:&#92;&quot;Argentina&#92;&quot;,&#92;&quot;HDICode&#92;&quot;:&#92;&quot;Very High&#92;&quot;,&#92;&quot;Region&#92;&quot;:&#92;&quot;LAC&#92;&quot;,&#92;&quot;hdi_rank_2022&#92;&quot;:48.0,&#92;&quot;Year&#92;&quot;:2011,&#92;&quot;HDI&#92;&quot;:0.842,&#92;&quot;PopTotal&#92;&quot;:41.52074,&#92;&quot;Happiness Score&#92;&quot;:6.242,&#92;&quot;GNI pc&#92;&quot;:28577.658,&#92;&quot;GDP pc&#92;&quot;:29425.76,&#92;&quot;Population&#92;&quot;:41730655.0,&#92;&quot;World region&#92;&quot;:&#92;&quot;South America&#92;&quot;},{&#92;&quot;Code&#92;&quot;:&#92;&quot;ARM&#92;&quot;,&#92;&quot;Country&#92;&quot;:&#92;&quot;Armenia&#92;&quot;,&#92;&quot;HDICode&#92;&quot;:&#92;&quot;High&#92;&quot;,&#92;&quot;Region&#92;&quot;:&#92;&quot;ECA&#92;&quot;,&#92;&quot;hdi_rank_2022&#92;&quot;:76.0,&#92;&quot;Year&#92;&quot;:2011,&#92;&quot;HDI&#92;&quot;:0.743,&#92;&quot;PopTotal&#92;&quot;:2.928976,&#92;&quot;Happiness Score&#92;&quot;:4.474,&#92;&quot;GNI pc&#92;&quot;:12143.653,&#92;&quot;GDP pc&#92;&quot;:10990.177,&#92;&quot;Population&#92;&quot;:2923269.0,&#92;&quot;World region&#92;&quot;:&#92;&quot;Asia&#92;&quot;},{&#92;&quot;Code&#92;&quot;:&#92;&quot;AUS&#92;&quot;,&#92;&quot;Country&#92;&quot;:&#92;&quot;Australia&#92;&quot;,&#92;&quot;HDICode&#92;&quot;:&#92;&quot;Very High&#92;&quot;,&#92;&quot;Region&#92;&quot;:NaN,&#92;&quot;hdi_rank_2022&#92;&quot;:10.0,&#92;&quot;Year&#92;&quot;:2011,&#92;&quot;HDI&#92;&quot;:0.927,&#92;&quot;PopTotal&#92;&quot;:22.357034,&#92;&quot;Happiness Score&#92;&quot;:7.345,&#92;&quot;GNI pc&#92;&quot;:51317.3,&#92;&quot;GDP pc&#92;&quot;:53257.047,&#92;&quot;Population&#92;&quot;:22479779.0,&#92;&quot;World region&#92;&quot;:&#92;&quot;Oceania&#92;&quot;},{&#92;&quot;Code&#92;&quot;:&#92;&quot;AUT&#92;&quot;,&#92;&quot;Country&#92;&quot;:&#92;&quot;Austria&#92;&quot;,&#92;&quot;HDICode&#92;&quot;:&#92;&quot;Very High&#92;&quot;,&#92;&quot;Region&#92;&quot;:NaN,&#92;&quot;hdi_rank_2022&#92;&quot;:22.0,&#92;&quot;Year&#92;&quot;:2011,&#92;&quot;HDI&#92;&quot;:0.907,&#92;&quot;PopTotal&#92;&quot;:8.3911995,&#92;&quot;Happiness Score&#92;&quot;:7.227,&#92;&quot;GNI pc&#92;&quot;:61903.887,&#92;&quot;GDP pc&#92;&quot;:61272.258,&#92;&quot;Population&#92;&quot;:8393272.0,&#92;&quot;World region&#92;&quot;:&#92;&quot;Europe&#92;&quot;},{&#92;&quot;Code&#92;&quot;:&#92;&quot;AZE&#92;&quot;,&#92;&quot;Country&#92;&quot;:&#92;&quot;Azerbaijan&#92;&quot;,&#92;&quot;HDICode&#92;&quot;:&#92;&quot;High&#92;&quot;,&#92;&quot;Region&#92;&quot;:&#92;&quot;ECA&#92;&quot;,&#92;&quot;hdi_rank_2022&#92;&quot;:89.0,&#92;&quot;Year&#92;&quot;:2011,&#92;&quot;HDI&#92;&quot;:0.735,&#92;&quot;PopTotal&#92;&quot;:9.3590145,&#92;&quot;Happiness Score&#92;&quot;:4.582,&#92;&quot;GNI pc&#92;&quot;:NaN,&#92;&quot;GDP pc&#92;&quot;:19358.078,&#92;&quot;Population&#92;&quot;:9256156.0,&#92;&quot;World region&#92;&quot;:&#92;&quot;Asia&#92;&quot;},{&#92;&quot;Code&#92;&quot;:&#92;&quot;BHR&#92;&quot;,&#92;&quot;Country&#92;&quot;:&#92;&quot;Bahrain&#92;&quot;,&#92;&quot;HDICode&#92;&quot;:&#92;&quot;Very High&#92;&quot;,&#92;&quot;Region&#92;&quot;:&#92;&quot;AS&#92;&quot;,&#92;&quot;hdi_rank_2022&#92;&quot;:34.0,&#92;&quot;Year&#92;&quot;:2011,&#92;&quot;HDI&#92;&quot;:0.812,&#92;&quot;PopTotal&#92;&quot;:1.212077,&#92;&quot;Happiness Score&#92;&quot;:5.568,&#92;&quot;GNI pc&#92;&quot;:56204.37,&#92;&quot;GDP pc&#92;&quot;:53132.33,&#92;&quot;Population&#92;&quot;:1206733.0,&#92;&quot;World region&#92;&quot;:&#92;&quot;Asia&#92;&quot;}]&quot;' data-total-rows='1461' data-total-columns='13' data-max-columns='50' data-banner-text='&quot;&quot;' data-pagination='true' data-page-size='10' data-field-types='[[&quot;Code&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;Country&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;HDICode&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;Region&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;hdi_rank_2022&quot;,[&quot;number&quot;,&quot;float64&quot;]],[&quot;Year&quot;,[&quot;integer&quot;,&quot;int64&quot;]],[&quot;HDI&quot;,[&quot;number&quot;,&quot;float64&quot;]],[&quot;PopTotal&quot;,[&quot;number&quot;,&quot;float64&quot;]],[&quot;Happiness Score&quot;,[&quot;number&quot;,&quot;float64&quot;]],[&quot;GNI pc&quot;,[&quot;number&quot;,&quot;float64&quot;]],[&quot;GDP pc&quot;,[&quot;number&quot;,&quot;float64&quot;]],[&quot;Population&quot;,[&quot;number&quot;,&quot;float64&quot;]],[&quot;World region&quot;,[&quot;string&quot;,&quot;str&quot;]]]' data-show-filters='true' data-show-download='true' data-show-column-summaries='true' data-show-data-types='true' data-show-page-size-selector='true' data-show-column-explorer='true' data-show-chart-builder='true' data-row-headers='[]' data-has-stable-row-id='false' data-lazy='false' data-preload='false' data-download-file-name='&quot;df&quot;'></marimo-table></marimo-ui-element>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "Kclp",
+      "code_hash": "36b0e796603ced4a16b282b5de6f0499",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<marimo-ui-element object-id='Kclp-0' random-id='6febde87-a513-a672-da55-6be81f26bfa7'><marimo-table data-initial-value='[]' data-label='null' data-data='&quot;[{&#92;&quot;Country&#92;&quot;:&#92;&quot;Afghanistan&#92;&quot;,&#92;&quot;Code&#92;&quot;:&#92;&quot;AFG&#92;&quot;,&#92;&quot;Population&#92;&quot;:29347708.0,&#92;&quot;World region&#92;&quot;:&#92;&quot;Asia&#92;&quot;,&#92;&quot;Year&#92;&quot;:2011,&#92;&quot;HDICode&#92;&quot;:&#92;&quot;Low&#92;&quot;,&#92;&quot;HDI&#92;&quot;:0.457,&#92;&quot;GDP pc&#92;&quot;:2757.0525,&#92;&quot;GNI pc&#92;&quot;:NaN,&#92;&quot;Happiness Score&#92;&quot;:4.258},{&#92;&quot;Country&#92;&quot;:&#92;&quot;Albania&#92;&quot;,&#92;&quot;Code&#92;&quot;:&#92;&quot;ALB&#92;&quot;,&#92;&quot;Population&#92;&quot;:2911499.0,&#92;&quot;World region&#92;&quot;:&#92;&quot;Europe&#92;&quot;,&#92;&quot;Year&#92;&quot;:2011,&#92;&quot;HDICode&#92;&quot;:&#92;&quot;High&#92;&quot;,&#92;&quot;HDI&#92;&quot;:0.779,&#92;&quot;GDP pc&#92;&quot;:12153.114,&#92;&quot;GNI pc&#92;&quot;:11936.705,&#92;&quot;Happiness Score&#92;&quot;:5.134},{&#92;&quot;Country&#92;&quot;:&#92;&quot;Algeria&#92;&quot;,&#92;&quot;Code&#92;&quot;:&#92;&quot;DZA&#92;&quot;,&#92;&quot;Population&#92;&quot;:36903374.0,&#92;&quot;World region&#92;&quot;:&#92;&quot;Africa&#92;&quot;,&#92;&quot;Year&#92;&quot;:2011,&#92;&quot;HDICode&#92;&quot;:&#92;&quot;High&#92;&quot;,&#92;&quot;HDI&#92;&quot;:0.725,&#92;&quot;GDP pc&#92;&quot;:14641.964,&#92;&quot;GNI pc&#92;&quot;:16082.684,&#92;&quot;Happiness Score&#92;&quot;:5.368},{&#92;&quot;Country&#92;&quot;:&#92;&quot;Angola&#92;&quot;,&#92;&quot;Code&#92;&quot;:&#92;&quot;AGO&#92;&quot;,&#92;&quot;Population&#92;&quot;:24218358.0,&#92;&quot;World region&#92;&quot;:&#92;&quot;Africa&#92;&quot;,&#92;&quot;Year&#92;&quot;:2011,&#92;&quot;HDICode&#92;&quot;:&#92;&quot;Medium&#92;&quot;,&#92;&quot;HDI&#92;&quot;:0.533,&#92;&quot;GDP pc&#92;&quot;:11037.639,&#92;&quot;GNI pc&#92;&quot;:11621.377,&#92;&quot;Happiness Score&#92;&quot;:4.178},{&#92;&quot;Country&#92;&quot;:&#92;&quot;Argentina&#92;&quot;,&#92;&quot;Code&#92;&quot;:&#92;&quot;ARG&#92;&quot;,&#92;&quot;Population&#92;&quot;:41730655.0,&#92;&quot;World region&#92;&quot;:&#92;&quot;South America&#92;&quot;,&#92;&quot;Year&#92;&quot;:2011,&#92;&quot;HDICode&#92;&quot;:&#92;&quot;Very High&#92;&quot;,&#92;&quot;HDI&#92;&quot;:0.842,&#92;&quot;GDP pc&#92;&quot;:29425.76,&#92;&quot;GNI pc&#92;&quot;:28577.658,&#92;&quot;Happiness Score&#92;&quot;:6.242},{&#92;&quot;Country&#92;&quot;:&#92;&quot;Armenia&#92;&quot;,&#92;&quot;Code&#92;&quot;:&#92;&quot;ARM&#92;&quot;,&#92;&quot;Population&#92;&quot;:2923269.0,&#92;&quot;World region&#92;&quot;:&#92;&quot;Asia&#92;&quot;,&#92;&quot;Year&#92;&quot;:2011,&#92;&quot;HDICode&#92;&quot;:&#92;&quot;High&#92;&quot;,&#92;&quot;HDI&#92;&quot;:0.743,&#92;&quot;GDP pc&#92;&quot;:10990.177,&#92;&quot;GNI pc&#92;&quot;:12143.653,&#92;&quot;Happiness Score&#92;&quot;:4.474},{&#92;&quot;Country&#92;&quot;:&#92;&quot;Australia&#92;&quot;,&#92;&quot;Code&#92;&quot;:&#92;&quot;AUS&#92;&quot;,&#92;&quot;Population&#92;&quot;:22479779.0,&#92;&quot;World region&#92;&quot;:&#92;&quot;Oceania&#92;&quot;,&#92;&quot;Year&#92;&quot;:2011,&#92;&quot;HDICode&#92;&quot;:&#92;&quot;Very High&#92;&quot;,&#92;&quot;HDI&#92;&quot;:0.927,&#92;&quot;GDP pc&#92;&quot;:53257.047,&#92;&quot;GNI pc&#92;&quot;:51317.3,&#92;&quot;Happiness Score&#92;&quot;:7.345},{&#92;&quot;Country&#92;&quot;:&#92;&quot;Austria&#92;&quot;,&#92;&quot;Code&#92;&quot;:&#92;&quot;AUT&#92;&quot;,&#92;&quot;Population&#92;&quot;:8393272.0,&#92;&quot;World region&#92;&quot;:&#92;&quot;Europe&#92;&quot;,&#92;&quot;Year&#92;&quot;:2011,&#92;&quot;HDICode&#92;&quot;:&#92;&quot;Very High&#92;&quot;,&#92;&quot;HDI&#92;&quot;:0.907,&#92;&quot;GDP pc&#92;&quot;:61272.258,&#92;&quot;GNI pc&#92;&quot;:61903.887,&#92;&quot;Happiness Score&#92;&quot;:7.227},{&#92;&quot;Country&#92;&quot;:&#92;&quot;Azerbaijan&#92;&quot;,&#92;&quot;Code&#92;&quot;:&#92;&quot;AZE&#92;&quot;,&#92;&quot;Population&#92;&quot;:9256156.0,&#92;&quot;World region&#92;&quot;:&#92;&quot;Asia&#92;&quot;,&#92;&quot;Year&#92;&quot;:2011,&#92;&quot;HDICode&#92;&quot;:&#92;&quot;High&#92;&quot;,&#92;&quot;HDI&#92;&quot;:0.735,&#92;&quot;GDP pc&#92;&quot;:19358.078,&#92;&quot;GNI pc&#92;&quot;:NaN,&#92;&quot;Happiness Score&#92;&quot;:4.582},{&#92;&quot;Country&#92;&quot;:&#92;&quot;Bahrain&#92;&quot;,&#92;&quot;Code&#92;&quot;:&#92;&quot;BHR&#92;&quot;,&#92;&quot;Population&#92;&quot;:1206733.0,&#92;&quot;World region&#92;&quot;:&#92;&quot;Asia&#92;&quot;,&#92;&quot;Year&#92;&quot;:2011,&#92;&quot;HDICode&#92;&quot;:&#92;&quot;Very High&#92;&quot;,&#92;&quot;HDI&#92;&quot;:0.812,&#92;&quot;GDP pc&#92;&quot;:53132.33,&#92;&quot;GNI pc&#92;&quot;:56204.37,&#92;&quot;Happiness Score&#92;&quot;:5.568}]&quot;' data-total-rows='1461' data-total-columns='10' data-max-columns='50' data-banner-text='&quot;&quot;' data-pagination='true' data-page-size='10' data-field-types='[[&quot;Country&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;Code&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;Population&quot;,[&quot;number&quot;,&quot;float64&quot;]],[&quot;World region&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;Year&quot;,[&quot;integer&quot;,&quot;int64&quot;]],[&quot;HDICode&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;HDI&quot;,[&quot;number&quot;,&quot;float64&quot;]],[&quot;GDP pc&quot;,[&quot;number&quot;,&quot;float64&quot;]],[&quot;GNI pc&quot;,[&quot;number&quot;,&quot;float64&quot;]],[&quot;Happiness Score&quot;,[&quot;number&quot;,&quot;float64&quot;]]]' data-show-filters='true' data-show-download='true' data-show-column-summaries='true' data-show-data-types='true' data-show-page-size-selector='true' data-show-column-explorer='true' data-show-chart-builder='true' data-row-headers='[]' data-has-stable-row-id='false' data-lazy='false' data-preload='false' data-download-file-name='&quot;df&quot;'></marimo-table></marimo-ui-element>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "ImWj",
+      "code_hash": null,
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "emfo",
+      "code_hash": "b10141235d34c018e2ed9c585198c28a",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<marimo-ui-element object-id='emfo-0' random-id='0d805479-0e62-158d-cb3f-251ed86facda'><marimo-table data-initial-value='[]' data-label='null' data-data='&quot;[{&#92;&quot;Code&#92;&quot;:&#92;&quot;AFG&#92;&quot;,&#92;&quot;Country&#92;&quot;:&#92;&quot;Afghanistan&#92;&quot;,&#92;&quot;HDICode&#92;&quot;:&#92;&quot;Low&#92;&quot;,&#92;&quot;Region&#92;&quot;:&#92;&quot;SA&#92;&quot;,&#92;&quot;hdi_rank_2022&#92;&quot;:182.0,&#92;&quot;Year&#92;&quot;:2022,&#92;&quot;HDI&#92;&quot;:0.462,&#92;&quot;PopTotal&#92;&quot;:41.128771,&#92;&quot;Happiness Score&#92;&quot;:1.859,&#92;&quot;GNI pc&#92;&quot;:1979.5304,&#92;&quot;GDP pc&#92;&quot;:1981.7102,&#92;&quot;Population&#92;&quot;:40578847.0,&#92;&quot;World region&#92;&quot;:&#92;&quot;Asia&#92;&quot;},{&#92;&quot;Code&#92;&quot;:&#92;&quot;ALB&#92;&quot;,&#92;&quot;Country&#92;&quot;:&#92;&quot;Albania&#92;&quot;,&#92;&quot;HDICode&#92;&quot;:&#92;&quot;High&#92;&quot;,&#92;&quot;Region&#92;&quot;:&#92;&quot;ECA&#92;&quot;,&#92;&quot;hdi_rank_2022&#92;&quot;:74.0,&#92;&quot;Year&#92;&quot;:2022,&#92;&quot;HDI&#92;&quot;:0.789,&#92;&quot;PopTotal&#92;&quot;:2.842321,&#92;&quot;Happiness Score&#92;&quot;:5.277,&#92;&quot;GNI pc&#92;&quot;:19436.006,&#92;&quot;GDP pc&#92;&quot;:19388.873,&#92;&quot;Population&#92;&quot;:2827614.0,&#92;&quot;World region&#92;&quot;:&#92;&quot;Europe&#92;&quot;},{&#92;&quot;Code&#92;&quot;:&#92;&quot;DZA&#92;&quot;,&#92;&quot;Country&#92;&quot;:&#92;&quot;Algeria&#92;&quot;,&#92;&quot;HDICode&#92;&quot;:&#92;&quot;High&#92;&quot;,&#92;&quot;Region&#92;&quot;:&#92;&quot;AS&#92;&quot;,&#92;&quot;hdi_rank_2022&#92;&quot;:93.0,&#92;&quot;Year&#92;&quot;:2022,&#92;&quot;HDI&#92;&quot;:0.745,&#92;&quot;PopTotal&#92;&quot;:44.903225,&#92;&quot;Happiness Score&#92;&quot;:5.329,&#92;&quot;GNI pc&#92;&quot;:16253.346,&#92;&quot;GDP pc&#92;&quot;:14782.2,&#92;&quot;Population&#92;&quot;:45477391.0,&#92;&quot;World region&#92;&quot;:&#92;&quot;Africa&#92;&quot;},{&#92;&quot;Code&#92;&quot;:&#92;&quot;ARG&#92;&quot;,&#92;&quot;Country&#92;&quot;:&#92;&quot;Argentina&#92;&quot;,&#92;&quot;HDICode&#92;&quot;:&#92;&quot;Very High&#92;&quot;,&#92;&quot;Region&#92;&quot;:&#92;&quot;LAC&#92;&quot;,&#92;&quot;hdi_rank_2022&#92;&quot;:48.0,&#92;&quot;Year&#92;&quot;:2022,&#92;&quot;HDI&#92;&quot;:0.849,&#92;&quot;PopTotal&#92;&quot;:45.510318,&#92;&quot;Happiness Score&#92;&quot;:6.024,&#92;&quot;GNI pc&#92;&quot;:27489.281,&#92;&quot;GDP pc&#92;&quot;:27825.027,&#92;&quot;Population&#92;&quot;:45407904.0,&#92;&quot;World region&#92;&quot;:&#92;&quot;South America&#92;&quot;},{&#92;&quot;Code&#92;&quot;:&#92;&quot;ARM&#92;&quot;,&#92;&quot;Country&#92;&quot;:&#92;&quot;Armenia&#92;&quot;,&#92;&quot;HDICode&#92;&quot;:&#92;&quot;High&#92;&quot;,&#92;&quot;Region&#92;&quot;:&#92;&quot;ECA&#92;&quot;,&#92;&quot;hdi_rank_2022&#92;&quot;:76.0,&#92;&quot;Year&#92;&quot;:2022,&#92;&quot;HDI&#92;&quot;:0.786,&#92;&quot;PopTotal&#92;&quot;:2.780469,&#92;&quot;Happiness Score&#92;&quot;:5.342,&#92;&quot;GNI pc&#92;&quot;:17431.662,&#92;&quot;GDP pc&#92;&quot;:17886.178,&#92;&quot;Population&#92;&quot;:2880880.0,&#92;&quot;World region&#92;&quot;:&#92;&quot;Asia&#92;&quot;},{&#92;&quot;Code&#92;&quot;:&#92;&quot;AUS&#92;&quot;,&#92;&quot;Country&#92;&quot;:&#92;&quot;Australia&#92;&quot;,&#92;&quot;HDICode&#92;&quot;:&#92;&quot;Very High&#92;&quot;,&#92;&quot;Region&#92;&quot;:NaN,&#92;&quot;hdi_rank_2022&#92;&quot;:10.0,&#92;&quot;Year&#92;&quot;:2022,&#92;&quot;HDI&#92;&quot;:0.946,&#92;&quot;PopTotal&#92;&quot;:26.1774135,&#92;&quot;Happiness Score&#92;&quot;:7.095,&#92;&quot;GNI pc&#92;&quot;:59134.29,&#92;&quot;GDP pc&#92;&quot;:60029.133,&#92;&quot;Population&#92;&quot;:26200987.0,&#92;&quot;World region&#92;&quot;:&#92;&quot;Oceania&#92;&quot;},{&#92;&quot;Code&#92;&quot;:&#92;&quot;AUT&#92;&quot;,&#92;&quot;Country&#92;&quot;:&#92;&quot;Austria&#92;&quot;,&#92;&quot;HDICode&#92;&quot;:&#92;&quot;Very High&#92;&quot;,&#92;&quot;Region&#92;&quot;:NaN,&#92;&quot;hdi_rank_2022&#92;&quot;:22.0,&#92;&quot;Year&#92;&quot;:2022,&#92;&quot;HDI&#92;&quot;:0.926,&#92;&quot;PopTotal&#92;&quot;:8.939617,&#92;&quot;Happiness Score&#92;&quot;:7.097,&#92;&quot;GNI pc&#92;&quot;:64044.957,&#92;&quot;GDP pc&#92;&quot;:65694.555,&#92;&quot;Population&#92;&quot;:9064678.0,&#92;&quot;World region&#92;&quot;:&#92;&quot;Europe&#92;&quot;},{&#92;&quot;Code&#92;&quot;:&#92;&quot;BHR&#92;&quot;,&#92;&quot;Country&#92;&quot;:&#92;&quot;Bahrain&#92;&quot;,&#92;&quot;HDICode&#92;&quot;:&#92;&quot;Very High&#92;&quot;,&#92;&quot;Region&#92;&quot;:&#92;&quot;AS&#92;&quot;,&#92;&quot;hdi_rank_2022&#92;&quot;:34.0,&#92;&quot;Year&#92;&quot;:2022,&#92;&quot;HDI&#92;&quot;:0.888,&#92;&quot;PopTotal&#92;&quot;:1.472233,&#92;&quot;Happiness Score&#92;&quot;:6.173,&#92;&quot;GNI pc&#92;&quot;:60432.21,&#92;&quot;GDP pc&#92;&quot;:57572.996,&#92;&quot;Population&#92;&quot;:1533460.0,&#92;&quot;World region&#92;&quot;:&#92;&quot;Asia&#92;&quot;},{&#92;&quot;Code&#92;&quot;:&#92;&quot;BGD&#92;&quot;,&#92;&quot;Country&#92;&quot;:&#92;&quot;Bangladesh&#92;&quot;,&#92;&quot;HDICode&#92;&quot;:&#92;&quot;Medium&#92;&quot;,&#92;&quot;Region&#92;&quot;:&#92;&quot;SA&#92;&quot;,&#92;&quot;hdi_rank_2022&#92;&quot;:129.0,&#92;&quot;Year&#92;&quot;:2022,&#92;&quot;HDI&#92;&quot;:0.67,&#92;&quot;PopTotal&#92;&quot;:171.1863725,&#92;&quot;Happiness Score&#92;&quot;:4.282,&#92;&quot;GNI pc&#92;&quot;:8200.666,&#92;&quot;GDP pc&#92;&quot;:7888.164,&#92;&quot;Population&#92;&quot;:169384891.0,&#92;&quot;World region&#92;&quot;:&#92;&quot;Asia&#92;&quot;},{&#92;&quot;Code&#92;&quot;:&#92;&quot;BEL&#92;&quot;,&#92;&quot;Country&#92;&quot;:&#92;&quot;Belgium&#92;&quot;,&#92;&quot;HDICode&#92;&quot;:&#92;&quot;Very High&#92;&quot;,&#92;&quot;Region&#92;&quot;:NaN,&#92;&quot;hdi_rank_2022&#92;&quot;:12.0,&#92;&quot;Year&#92;&quot;:2022,&#92;&quot;HDI&#92;&quot;:0.942,&#92;&quot;PopTotal&#92;&quot;:11.65593,&#92;&quot;Happiness Score&#92;&quot;:6.859,&#92;&quot;GNI pc&#92;&quot;:61031.65,&#92;&quot;GDP pc&#92;&quot;:62561.78,&#92;&quot;Population&#92;&quot;:11641814.0,&#92;&quot;World region&#92;&quot;:&#92;&quot;Europe&#92;&quot;}]&quot;' data-total-rows='121' data-total-columns='13' data-max-columns='50' data-banner-text='&quot;&quot;' data-pagination='true' data-page-size='10' data-field-types='[[&quot;Code&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;Country&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;HDICode&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;Region&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;hdi_rank_2022&quot;,[&quot;number&quot;,&quot;float64&quot;]],[&quot;Year&quot;,[&quot;integer&quot;,&quot;int64&quot;]],[&quot;HDI&quot;,[&quot;number&quot;,&quot;float64&quot;]],[&quot;PopTotal&quot;,[&quot;number&quot;,&quot;float64&quot;]],[&quot;Happiness Score&quot;,[&quot;number&quot;,&quot;float64&quot;]],[&quot;GNI pc&quot;,[&quot;number&quot;,&quot;float64&quot;]],[&quot;GDP pc&quot;,[&quot;number&quot;,&quot;float64&quot;]],[&quot;Population&quot;,[&quot;number&quot;,&quot;float64&quot;]],[&quot;World region&quot;,[&quot;string&quot;,&quot;str&quot;]]]' data-show-filters='true' data-show-download='true' data-show-column-summaries='true' data-show-data-types='true' data-show-page-size-selector='true' data-show-column-explorer='true' data-show-chart-builder='true' data-row-headers='[]' data-has-stable-row-id='false' data-lazy='false' data-preload='false' data-download-file-name='&quot;df&quot;'></marimo-table></marimo-ui-element>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "Hstk",
+      "code_hash": "f2c7f476a2c543529de23a60f96d2d38",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "nWHF",
+      "code_hash": "89645421b7ad823b5520c37b10c0db6f",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "iLit",
+      "code_hash": "ce94782f231bc9caf3496d45a7ca81b8",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "ZHCJ",
+      "code_hash": "061a389daaa48f54d24248ca50599db0",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "ROlb",
+      "code_hash": "1d6940e019b9970cbfcfdac0d57ddeec",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "qnkX",
+      "code_hash": "4ce84eb9f5f865fc1d48190326fc6df2",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "TqIu",
+      "code_hash": "f641858be3b83c07bc7efaebeea4c193",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "Vxnm",
+      "code_hash": "216ea885c78a02e67ff829911c4f3209",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "DnEU",
+      "code_hash": "fb4709b98d101869c18908f333a53e2b",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "ulZA",
+      "code_hash": "f7f2c0cf6ffce15cc137872a420c1cca",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "ecfG",
+      "code_hash": "f45fc00afa78f7f00f6d30e55d2e8400",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "Pvdt",
+      "code_hash": "f74ec9100931623fed97b72dbca5986e",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "ZBYS",
+      "code_hash": "d1db9274810d41a74a23bfe84ed7e3bf",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "aLJB",
+      "code_hash": "1a0a1064b8d22ccfe906f127764f65b8",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "nHfw",
+      "code_hash": null,
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "xXTn",
+      "code_hash": "1d0db38904205bec4d6f6f6a1f6cec3e",
+      "outputs": [],
+      "console": []
+    }
+  ]
+}
