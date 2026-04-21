@@ -196,3 +196,7 @@ data/
 
 # OS
 .DS_Store
+
+# Worktrees
+.worktrees/
+worktrees/
