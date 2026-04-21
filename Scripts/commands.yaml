@@ -1,0 +1,15 @@
+groups:
+  Scripts:
+    email: "commands.scripts.email"
+    books: "commands.scripts.books"
+    ytrans: "commands.scripts.ytrans"
+    ytdl: "commands.scripts.ytdl"
+    epubmd: "commands.scripts.epubmd"
+    ebooktxt: "commands.scripts.ebooktxt"
+    watchpaper: "commands.scripts.watchpaper"
+    cleanfonts: "commands.scripts.cleanfonts"
+    scipaper: "commands.scripts.scipaper"
+
+  Scrapers:
+    happy: "commands.scrapers.happy"
+    social: "commands.scrapers.social"
