@@ -16,10 +16,9 @@ Why Polars?
 import time
 from functools import wraps
 
-import polars as pl
-
 import numpy as np
 import pandas as pd
+import polars as pl
 
 # =============================================================================
 # TIMER DECORATOR - To compare Pandas vs Polars performance

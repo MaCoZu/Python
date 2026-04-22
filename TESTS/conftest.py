@@ -1,11 +1,17 @@
 """Shared pytest fixtures."""
 
+import sys
 from collections.abc import Iterator
+from pathlib import Path
 from typing import Any
 
+import pandas as pd
 import pytest
 
-import pandas as pd
+# Add SRC to path for imports
+_src = Path(__file__).parent.parent / "SRC"
+if str(_src) not in sys.path:
+    sys.path.insert(0, str(_src))
 
 
 @pytest.fixture

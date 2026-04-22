@@ -2,10 +2,10 @@
 
 from pathlib import Path
 
+import pandas as pd
 import pytest
 
-import pandas as pd
-from utils.io import read_csv_auto, save_results
+from SRC.utils.io import read_csv_auto, save_results
 
 
 def test_save_and_read_csv(tmp_path: Path, sample_df: pd.DataFrame) -> None:

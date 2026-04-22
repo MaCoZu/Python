@@ -1,9 +1,9 @@
 """Tests for statistical utilities."""
 
+import pandas as pd
 import pytest
 
-import pandas as pd
-from utils.stats import describe_numeric, detect_outliers
+from SRC.utils.stats import describe_numeric, detect_outliers
 
 
 def test_describe_numeric(df_with_missing: pd.DataFrame) -> None:

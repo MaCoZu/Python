@@ -11,7 +11,7 @@ dependencies = [
     "seaborn>=0.13.0",
     "jupyter>=1.1.0",
     "ipykernel>=6.29.0",
-    "marimo>=0.23.1",
+    "marimo>=0.23.2",
     "altair>=6.0.0",
     "vega-datasets>=0.9.0",
     "pandasql>=0.7.3",
@@ -20,6 +20,13 @@ dependencies = [
     "xlrd>=2.0.2",
     "nbqa>=1.9.1",
     "pre-commit>=4.5.1",
+    "textual>=0.100.0",
+    "pyyaml>=6.0",
+    "beautifulsoup4>=4.12.0",
+    "requests>=2.31.0",
+    "pytest>=8.0.0",
+    "ruff>=0.8.0",
+    "mypy>=1.13.0",
 ]
 
 [project.optional-dependencies]
@@ -35,41 +42,29 @@ target-version = "py313"
 exclude = [
     ".venv",
     "__pycache__",
-    "statistics/statistician package",
-    "**/*.ipynb",                      # Exclude all notebooks by default
+    "**/*.ipynb",
+    "SCRIPTS/**",
+    "NOTEBOOKS/**/statistician package/**",
+    "DOCS",
 ]
-
-[tool.ruff.format]
-indent-style = "space"
-
-[tool.marimo]
-format_on_save = true
 
 [tool.ruff.lint]
-select = [
-    "E",   # pycodestyle errors
-    "W",   # pycodestyle warnings
-    "F",   # pyflakes
-    "I",   # isort
-    "B",   # flake8-bugbear
-    "C4",  # flake8-comprehensions
-    "UP",  # pyupgrade
-    "N",   # pep8-naming
-    "SIM", # flake8-simplify
-    "PTH", # flake8-use-pathlib
-    "RUF", # Ruff-specific rules
-]
-ignore = [
-    "E501", # line too long (handled by formatter)
+# Disable most rules for learning files
+extend-ignore = [
+    "E402",  # top-level imports
+    "E501",  # line too long
+    "E501",  # long lines
+    "F401",  # unused imports
+    "F841",  # unused variables
+    "N999",  # invalid module names
+    "RUF003", # walrus operator
+    "RUF005", # list concat
 ]
 
 [tool.ruff.lint.per-file-ignores]
-"__init__.py" = ["F401"]     # unused imports in __init__.py
-"tests/*" = ["N802", "F401"]
-# Tutorial/example files can have intentional patterns
-"python/Python_tricks.py" = ["E402", "RUF003", "E731"]
-"python/Python_2.0_perfomance.py" = ["PTH123", "F821", "F841"]
-"pandas/polars_cheatsheet.py" = ["F841"]
+# Only strict rules for actual src code
+"SRC/*" = []
+"TOOLS/scraper/*" = ["RUF005"]
 # Scraper uses list concatenation intentionally
 "scraper/*.py" = ["RUF005", "W292", "I001"]
 
@@ -100,10 +95,6 @@ testpaths = ["tests"]
 python_files = ["test_*.py"]
 python_functions = ["test_*"]
 addopts = ["-v", "--strict-markers", "--tb=short"]
-
-[build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
 
 [dependency-groups]
 dev = [

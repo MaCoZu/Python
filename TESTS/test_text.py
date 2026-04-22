@@ -1,6 +1,6 @@
 """Tests for text processing utilities."""
 
-from utils.text import normalize_whitespace, remove_mentions, remove_urls
+from SRC.utils.text import normalize_whitespace, remove_mentions, remove_urls
 
 
 def test_remove_urls() -> None:

@@ -1,9 +1,8 @@
 import math
 
-import scipy.stats as st
-
 import numpy as np
 import pandas as pd
+import scipy.stats as st
 
 
 def confidence_interval(data, confidence, pop_std=None):

@@ -1,6 +1,6 @@
 import marimo
 
-__generated_with = "0.23.1"
+__generated_with = "0.23.2"
 app = marimo.App(width="full")
 
 
@@ -27,19 +27,32 @@ def _(pd):
     le = pd.read_csv("../../Data/life_expectancy_clean.csv")
     sdg = pd.read_csv("../../Data/SDG_from2000_clean.csv")
     gdp_gni = pd.read_csv("../../Data/GNI_GDP.csv")
-    return footprint, gdp_gni, happy, hdi
+    return gdp_gni, happy, hdi
 
 
 @app.cell
-def _(footprint):
-    footprint
+def _(hdi):
+    hdi
     return
 
 
 @app.cell
 def _(hdi):
-    hdi[hdi["year"] == 2021]
-    return
+    hdi_r = hdi.rename(
+        columns={
+            "country": "Country",
+            "iso3": "Code",
+            "year": "Year",
+            "hdi": "HDI",
+            "hdi_rank_2022": "HDIRank2022",
+            "region": "Region",
+            "hdicode": "HDICode",
+            "pop_total": "PopTotal",
+        }
+    )
+
+    hdi_r
+    return (hdi_r,)
 
 
 @app.cell
@@ -54,79 +67,150 @@ def _(gdp_gni):
         axis=1,
         inplace=True,
     )
+
+    gdp_gni
     return
 
 
 @app.cell
-def _(gdp_gni, happy):
-    happy_gni = happy.merge(gdp_gni, on=["Country", "Code", "Year"], how="inner")
-    return (happy_gni,)
-
-
-@app.cell
-def _(happy_gni):
-    happy_gni.columns
+def _(happy):
+    happy
     return
 
 
 @app.cell
-def _(hdi):
-    hdi_n = hdi.rename(
-        columns={
+def _(gdp_gni, happy, hdi_r):
+    happy_hdi = happy.merge(hdi_r, on=["Country", "Code", "Year"], how="outer")
+    happy_gdp = happy_hdi.merge(gdp_gni, on=["Country", "Code", "Year"], how="outer")
+    happy_gdp
+    return happy_gdp, happy_hdi
+
+
+@app.cell
+def _(pd):
+    hpi_all = pd.read_csv("../scraper/happy_planet_index_all.csv")
+    hpi_all.rename(
+        {
             "country": "Country",
-            "iso3": "Code",
             "year": "Year",
-            "hdi": "HDI",
-            "region": "Region",
-            "hdicode": "HDICode",
-            "pop_total": "PopTotal",
-        }
+            "life_expectancy": "HPI Life Expectancy",
+            "wellbeing": "HPI Wellbeing",
+            "carbon_footprint": "HPI Footprint",
+            "hpi_score": "HPI",
+            "rank": "HPI Rank",
+            "change": "HPI Change",
+        },
+        axis=1,
+        inplace=True,
     )
-    return (hdi_n,)
+    return (hpi_all,)
 
 
 @app.cell
-def _(hdi_n):
-    hdi_n.columns
+def _(hpi_all):
+    hpi_all
     return
 
 
 @app.cell
-def _(happy_gni, hdi_n):
-    happy_hdi = hdi_n.merge(happy_gni, on=["Country", "Code", "Year"], how="inner")
-    happy_hdi
-    return (happy_hdi,)
+def _(happy_gdp, hpi_all):
+    happy_hpi = happy_gdp.merge(hpi_all, on=["Country", "Year"], how="outer")
+    happy_hpi
+    return (happy_hpi,)
 
 
 @app.cell
-def _(happy_hdi):
-    happy_gni_n = happy_hdi[
+def _(pd):
+    spi_2021 = pd.read_csv("../scraper/social_progress_index_2021.csv")
+    spi_2022 = pd.read_csv("../scraper/social_progress_index_2022.csv")
+    spi_2024 = pd.read_csv("../scraper/social_progress_index_2024.csv")
+    spi_2021["Year"] = 2021
+    spi_2022["Year"] = 2022
+    spi_2024["Year"] = 2024
+    spi_all = pd.concat([spi_2021, spi_2022, spi_2024], ignore_index=True)
+    spi_all.rename(
+        {"country": "Country", "score": "SPI Score", "rank": "SPI Rank"}, axis=1, inplace=True
+    )
+    return (spi_all,)
+
+
+@app.cell
+def _(spi_all):
+    spi_all_r = spi_all[["Country", "Year", "SPI Score", "SPI Rank"]]
+    spi_all_r
+    return (spi_all_r,)
+
+
+@app.cell
+def _(happy_hpi, spi_all_r):
+    happy_spi = happy_hpi.merge(spi_all_r, on=["Country", "Year"], how="outer")
+    happy_spi
+    return (happy_spi,)
+
+
+@app.cell
+def _(happy_spi):
+    happy_spi.columns
+    return
+
+
+@app.cell
+def _(happy_spi):
+    happy_spi_s = happy_spi[
         [
             "Country",
             "Code",
             "Population",
+            "PopTotal",
             "World region",
+            "Region",
             "Year",
-            "HDICode",
-            "HDI",
-            "GDP pc",
-            "GNI pc",
             "Happiness Score",
+            "HDI",
+            "HDICode",
+            "HDIRank2022",
+            "GNI pc",
+            "GDP pc",
+            "HPI",
+            "HPI Rank",
+            "HPI Life Expectancy",
+            "HPI Wellbeing",
+            "HPI Footprint",
+            "HPI Change",
+            "SPI Score",
+            "SPI Rank",
         ]
     ]
-
-    happy_gni_n
-    return (happy_gni_n,)
+    return (happy_spi_s,)
 
 
 @app.cell
-def _(happy_gni_n):
-    happy_gni_n.groupby("World region").agg(
-        {
-            "HDI": ["std", "mean"],
-            "GNI pc": ["min", "max", "mean"],
-        }
-    )
+def _(happy_spi_s):
+    happy_spi_s.columns
+    return
+
+
+@app.cell
+def _(happy_spi_s):
+    happy_spi_s
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    ## Sandwich fill stable columns
+    """)
+    return
+
+
+@app.cell
+def _(happy_spi_s):
+    stable_cols = ["Code", "World region", "Region"]
+
+    happy_spi_sorted = happy_spi_s.sort_values(["Country", "Year"])
+    happy_spi_sorted[stable_cols] = happy_spi_sorted.groupby("Country")[stable_cols].ffill().bfill()
+    happy_spi_sorted
     return
 
 
@@ -140,70 +224,13 @@ def _(happy_gni_n):
 def _(happy_hdi):
     happy_hdi_2021 = happy_hdi[happy_hdi["Year"] == 2021]
     happy_hdi_2021
-    return (happy_hdi_2021,)
-
-
-@app.cell
-def _(pd):
-    hpi_all = pd.read_csv("../scraper/happy_planet_index_all.csv")
-    hpi_2021 = hpi_all[hpi_all["year"] == 2021]
-    return (hpi_2021,)
+    return
 
 
 @app.cell
 def _(hpi_2021):
     hpi_2021
     return
-
-
-@app.cell
-def _(hpi_2021):
-    # hpi_2021.rename(
-    #     columns={
-    #         "country": "Country",
-    #         "year": "Year",
-    #         "hpi_score": "HPI",
-    #         "life_expectancy": "Life expectancy",
-    #         "wellbeing": "Wellbeing",
-    #         "carbon_footprint": "Carbon footprint",
-    #     },
-    #     inplace=True,
-    # )
-
-    hpi_clean_2021 = hpi_2021[
-        [
-            "Country",
-            "Year",
-            "Life expectancy",
-            "Wellbeing",
-            "Carbon footprint",
-            "HPI",
-        ]
-    ]
-
-    hpi_clean_2021["Year"] = hpi_clean_2021.Year.astype(int)
-    hpi_clean_2021
-    return (hpi_clean_2021,)
-
-
-@app.cell
-def _(happy_hdi_2021, hpi_clean_2021):
-    happy_hpi_2021 = happy_hdi_2021.merge(hpi_clean_2021, on=["Country", "Year"], how="outer")
-    return (happy_hpi_2021,)
-
-
-@app.cell
-def _(happy_hpi_2021):
-    happy_hpi_2021
-    return
-
-
-@app.cell
-def _(pd):
-    spi = pd.read_csv("../scraper/social_progress_index_2021.csv")
-    spi.rename(columns={"country": "Country", "score": "SPI Score"}, inplace=True)
-    spi
-    return (spi,)
 
 
 @app.cell
@@ -260,9 +287,42 @@ def _(pd):
     return (happy_spi_2021_1,)
 
 
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    ## fixing nan
+    """)
+    return
+
+
 @app.cell
 def _(happy_spi_2021_1):
-    happy_spi_2021_1.columns
+    happy_spi_2021_1[happy_spi_2021_1["Country"].str.startswith("Central African")]
+    return
+
+
+@app.cell
+def _(hdi):
+    hdi.head()
+    return
+
+
+@app.cell
+def _(hdi):
+    hdi[hdi["country"] == "Angola"]
+    return
+
+
+@app.cell
+def _(happy_spi_2021_1):
+    # happy_spi_2021_1["Year"] = 2021
+    happy_spi_2021_1[happy_spi_2021_1["Code"].isna()]
+    return
+
+
+@app.cell
+def _(happy_spi_2021_1):
+    happy_spi_2021_1.isna().sum()
     return
 
 

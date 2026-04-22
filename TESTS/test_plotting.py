@@ -1,9 +1,8 @@
 """Tests for plotting utilities."""
 
-import pytest
-
 import pandas as pd
-from utils.plotting import correlation_heatmap, quick_hist
+
+from SRC.utils.plotting import correlation_heatmap, quick_hist
 
 
 def test_quick_hist(numeric_series: pd.Series) -> None:

@@ -1,9 +1,8 @@
 """Tests for cleaning utilities."""
 
-import pytest
-
 import pandas as pd
-from utils.cleaning import clean_columns, clean_text, handle_missing
+
+from SRC.utils.cleaning import clean_columns, clean_text, handle_missing
 
 
 def test_clean_columns(sample_df: pd.DataFrame) -> None:

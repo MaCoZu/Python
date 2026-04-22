@@ -10,7 +10,6 @@ from contextlib import suppress
 import requests
 from bs4 import BeautifulSoup
 
-
 BASE_URL = "https://statbase.org/datasets/indexes-and-ratings/social-progress-index/"
 
 AVAILABLE_YEARS = [

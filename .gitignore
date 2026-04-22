@@ -200,3 +200,4 @@ data/
 # Worktrees
 .worktrees/
 worktrees/
+cpu_usage.log
