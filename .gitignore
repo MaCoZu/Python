@@ -176,6 +176,7 @@ uv.lock
 
 # Data files
 data/
+NOTEBOOKS/pandas/ReDi/
 *.csv
 *.xlsx
 *.parquet
