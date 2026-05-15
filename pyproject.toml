@@ -49,6 +49,7 @@ exclude = [
     "__pycache__",
     "**/*.ipynb",
     "SCRIPTS/**",
+    "NOTEBOOKS/**/*.ipynb",
     "NOTEBOOKS/**/statistician package/**",
     "DOCS",
 ]
