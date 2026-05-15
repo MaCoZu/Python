@@ -1,14 +1,16 @@
 import marimo
 
-__generated_with = "0.23.2"
+__generated_with = "0.23.3"
 app = marimo.App(width="full")
 
 
 @app.cell
 def _():
     import pandas as pd
+    import country_converter as coco
+    import logging
 
-    return (pd,)
+    return coco, logging, pd
 
 
 @app.cell
@@ -19,40 +21,26 @@ def _(pd):
 
 @app.cell
 def _(pd):
-    hdi = pd.read_csv("../../Data/hdi_from2000_cleaned.csv")
-    happy = pd.read_csv("../../Data/happiness_clean.csv")
-    hale = pd.read_csv("../../Data/HALE_clean.csv")
-    co2 = pd.read_csv("../../Data/co2_pc_clean.csv")
-    footprint = pd.read_csv("../../Data/footprint_clean_2019.csv")
-    le = pd.read_csv("../../Data/life_expectancy_clean.csv")
-    sdg = pd.read_csv("../../Data/SDG_from2000_clean.csv")
-    gdp_gni = pd.read_csv("../../Data/GNI_GDP.csv")
-    return gdp_gni, happy, hdi
+    # hdi_2023 = pd.read_csv("../../../Data/hdi_2023.csv", encoding="latin1")
+    happy = pd.read_csv("../../../Data/happiness_clean.csv")
+    # hale = pd.read_csv("../../Data/HALE_clean.csv")
+    # co2 = pd.read_csv("../../Data/co2_pc_clean.csv")
+    # footprint = pd.read_csv("../../Data/footprint_clean_2019.csv")
+    # le = pd.read_csv("../../Data/life_expectancy_clean.csv")
+    # sdg = pd.read_csv("../../Data/SDG_from2000_clean.csv")
+    gdp_gni = pd.read_csv("../../../Data/GNI_GDP.csv")
+    return gdp_gni, happy
 
 
-@app.cell
-def _(hdi):
-    hdi
-    return
-
-
-@app.cell
-def _(hdi):
-    hdi_r = hdi.rename(
-        columns={
-            "country": "Country",
-            "iso3": "Code",
-            "year": "Year",
-            "hdi": "HDI",
-            "hdi_rank_2022": "HDIRank2022",
-            "region": "Region",
-            "hdicode": "HDICode",
-            "pop_total": "PopTotal",
-        }
+@app.function
+def entity_to_country(df):
+    return df.rename(
+        {
+            "Entity": "Country",
+        },
+        axis=1,
+        inplace=True,
     )
-
-    hdi_r
-    return (hdi_r,)
 
 
 @app.cell
@@ -72,23 +60,150 @@ def _(gdp_gni):
     return
 
 
-@app.cell
-def _(happy):
-    happy
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    ## Country Coverter - Clean Country and Codes
+    """)
     return
 
 
 @app.cell
-def _(gdp_gni, happy, hdi_r):
-    happy_hdi = happy.merge(hdi_r, on=["Country", "Code", "Year"], how="outer")
-    happy_gdp = happy_hdi.merge(gdp_gni, on=["Country", "Code", "Year"], how="outer")
-    happy_gdp
-    return happy_gdp, happy_hdi
+def _(coco, logging, pd):
+    # Silence logs to prevent the "not found in regex" spam
+    logging.getLogger("country_converter").setLevel(logging.ERROR)
+
+    cc = coco.CountryConverter()
+
+    def standardize_and_clean(df, country_col):
+        df = df.copy()
+
+        # 1. Define groups to skip
+        groups = [
+            "Africa",
+            "Asia",
+            "Europe",
+            "North America",
+            "South America",
+            "Oceania",
+            "High-income countries",
+            "Low-income countries",
+            "Lower-middle-income countries",
+            "Upper-middle-income countries",
+            "World",
+            "European Union",
+            "Total",
+        ]
+
+        # 2. Identify aggregate rows
+        is_aggregate = (
+            df[country_col].str.contains(r"\(.*\)", na=False)
+            | df[country_col].str.contains(
+                "income|countries|World|Union|Total", case=False, na=False
+            )
+            | df[country_col].isin(groups)
+            | (df[country_col].str.len() > 35)
+        )
+
+        # 3. Process unique valid names only (efficiency)
+        valid_candidates = df.loc[~is_aggregate, country_col].unique().tolist()
+
+        if not valid_candidates:
+            return pd.DataFrame()  # Or handle empty case as needed
+
+        # 4. Generate Mappings
+        # We use not_found=None so we can easily drop failed matches later
+        iso3_list = cc.convert(names=valid_candidates, to="ISO3", not_found="not found")
+        name_list = cc.convert(names=valid_candidates, to="name_short", not_found="not found")
+
+        # Ensure coco returns lists even for single results
+        if isinstance(iso3_list, str):
+            iso3_list = [iso3_list]
+        if isinstance(name_list, str):
+            name_list = [name_list]
+
+        iso_map = dict(zip(valid_candidates, iso3_list))
+        name_map = dict(zip(valid_candidates, name_list))
+
+        # 5. Create new columns and filter
+        df["Country_Clean"] = df[country_col].map(name_map)
+        df["Code_Clean"] = df[country_col].map(iso_map)
+
+        # Drop rows that failed conversion (the aggregates or unrecognized strings)
+        df = df.dropna(subset=["Code_Clean"]).reset_index(drop=True)
+
+        # 6. Reorder and Clean Columns
+        # Identify original columns to drop (including any 'Code' column if it exists)
+        cols_to_drop = [country_col]
+        if "Code" in df.columns:
+            cols_to_drop.append("Code")
+
+        # Get list of 'other' columns
+        other_cols = [
+            c for c in df.columns if c not in cols_to_drop + ["Country_Clean", "Code_Clean"]
+        ]
+
+        # Final assembly: Clean Country, Clean Code, then everything else
+        df = df[["Country_Clean", "Code_Clean"] + other_cols]
+
+        # Optional: Rename back to standard names
+        df = df.rename(columns={"Country_Clean": "Country", "Code_Clean": "Code"})
+
+        return df
+
+    return (standardize_and_clean,)
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+
+    """)
+    return
 
 
 @app.cell
-def _(pd):
-    hpi_all = pd.read_csv("../scraper/happy_planet_index_all.csv")
+def _(gdp_gni, happy, standardize_and_clean):
+    gdp_gni_c = standardize_and_clean(gdp_gni, "Country")
+    happy_c = standardize_and_clean(happy, "Country")
+    return gdp_gni_c, happy_c
+
+
+@app.cell
+def _(happy_c):
+    # gdp_gni_c[gdp_gni_c.duplicated(subset=["Country", "Code", "Year"], keep=False)]
+    happy_c[happy_c.duplicated(subset=["Country", "Code", "Year"], keep=False)].sort_values(
+        by=["Country", "Year"]
+    )
+    # happy[happy["Country"].isin(["Cyprus", "Somalia"])].sort_values(by=["Country", "Year"])
+    # happy[happy["Country"].isin(["Cyprus", "Somalia"])].sort_values(by=["Country", "Year"])
+    return
+
+
+@app.cell
+def _(gdp_gni_c, happy_c):
+    happy_gdp = happy_c.merge(gdp_gni_c, on=["Country", "Code", "Year"], how="outer")
+    return (happy_gdp,)
+
+
+@app.cell
+def _(happy_gdp):
+    happy_gdp.duplicated(subset=["Country", "Code", "Year"], keep=False)
+    happy_gdp[happy_gdp.duplicated(subset=["Country", "Code", "Year"], keep=False)]
+    return
+
+
+@app.cell
+def _(happy_c):
+    # happy_c.query("Code == CYP")
+    happy_c[happy_c["Country"] == "Cyprus"]
+    return
+
+
+@app.cell
+def _(pd, standardize_and_clean):
+    hpi_all = pd.read_csv("../../../Data/happy_planet_index/happy_planet_index_all.csv")
+
     hpi_all.rename(
         {
             "country": "Country",
@@ -103,27 +218,25 @@ def _(pd):
         axis=1,
         inplace=True,
     )
-    return (hpi_all,)
+
+    # hpi_all
+    hpi_all_c = standardize_and_clean(hpi_all, "Country")
+    # hpi_all_c
+    return (hpi_all_c,)
 
 
 @app.cell
-def _(hpi_all):
-    hpi_all
-    return
-
-
-@app.cell
-def _(happy_gdp, hpi_all):
-    happy_hpi = happy_gdp.merge(hpi_all, on=["Country", "Year"], how="outer")
+def _(happy_gdp, hpi_all_c):
+    happy_hpi = happy_gdp.merge(hpi_all_c, on=["Country", "Code", "Year"], how="inner")
     happy_hpi
     return (happy_hpi,)
 
 
 @app.cell
-def _(pd):
-    spi_2021 = pd.read_csv("../scraper/social_progress_index_2021.csv")
-    spi_2022 = pd.read_csv("../scraper/social_progress_index_2022.csv")
-    spi_2024 = pd.read_csv("../scraper/social_progress_index_2024.csv")
+def _(happy_hpi, pd, standardize_and_clean):
+    spi_2021 = pd.read_csv("../../../Data/social_progress_index/social_progress_index_2021.csv")
+    spi_2022 = pd.read_csv("../../../Data/social_progress_index/social_progress_index_2022.csv")
+    spi_2024 = pd.read_csv("../../../Data/social_progress_index/social_progress_index_2024.csv")
     spi_2021["Year"] = 2021
     spi_2022["Year"] = 2022
     spi_2024["Year"] = 2024
@@ -131,27 +244,11 @@ def _(pd):
     spi_all.rename(
         {"country": "Country", "score": "SPI Score", "rank": "SPI Rank"}, axis=1, inplace=True
     )
-    return (spi_all,)
 
-
-@app.cell
-def _(spi_all):
-    spi_all_r = spi_all[["Country", "Year", "SPI Score", "SPI Rank"]]
-    spi_all_r
-    return (spi_all_r,)
-
-
-@app.cell
-def _(happy_hpi, spi_all_r):
-    happy_spi = happy_hpi.merge(spi_all_r, on=["Country", "Year"], how="outer")
+    spi_all_c = standardize_and_clean(spi_all, "Country")
+    happy_spi = happy_hpi.merge(spi_all_c, on=["Country", "Code", "Year"], how="inner")
     happy_spi
     return (happy_spi,)
-
-
-@app.cell
-def _(happy_spi):
-    happy_spi.columns
-    return
 
 
 @app.cell
@@ -161,14 +258,9 @@ def _(happy_spi):
             "Country",
             "Code",
             "Population",
-            "PopTotal",
             "World region",
-            "Region",
             "Year",
             "Happiness Score",
-            "HDI",
-            "HDICode",
-            "HDIRank2022",
             "GNI pc",
             "GDP pc",
             "HPI",
@@ -181,175 +273,417 @@ def _(happy_spi):
             "SPI Rank",
         ]
     ]
+
+    happy_spi_s
     return (happy_spi_s,)
 
 
 @app.cell
 def _(happy_spi_s):
-    happy_spi_s.columns
+    happy_spi_s[["Year", "HPI Rank", "SPI Rank"]] = happy_spi_s[
+        ["Year", "HPI Rank", "SPI Rank"]
+    ].astype("Int32")
+    happy_spi_s.info()
     return
 
 
 @app.cell
 def _(happy_spi_s):
-    happy_spi_s
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md(r"""
-    ## Sandwich fill stable columns
-    """)
+    happy_spi_s[happy_spi_s.duplicated(subset=["Country", "Year"], keep=False)]
     return
 
 
 @app.cell
 def _(happy_spi_s):
-    stable_cols = ["Code", "World region", "Region"]
-
-    happy_spi_sorted = happy_spi_s.sort_values(["Country", "Year"])
-    happy_spi_sorted[stable_cols] = happy_spi_sorted.groupby("Country")[stable_cols].ffill().bfill()
-    happy_spi_sorted
+    happy_spi_s.reindex
     return
 
 
 @app.cell
-def _(happy_gni_n):
-    happy_gni_n["Year"] = happy_gni_n["Year"].astype(int)
+def _(happy):
+    happy[happy["Country"].isin(["Cyprus"])]
     return
 
 
 @app.cell
-def _(happy_hdi):
-    happy_hdi_2021 = happy_hdi[happy_hdi["Year"] == 2021]
-    happy_hdi_2021
+def _():
     return
 
 
 @app.cell
-def _(hpi_2021):
-    hpi_2021
-    return
-
-
-@app.cell
-def _(happy_hpi_2021, spi):
-    happy_spi_2021 = happy_hpi_2021.merge(spi, on="Country", how="outer")
-    happy_spi_2021
-    return (happy_spi_2021,)
-
-
-@app.cell
-def _(happy_spi_2021):
-    happy_spi_2021.columns
-    return
-
-
-@app.cell
-def _(happy_spi_2021):
-    happy_spi_2021_c = happy_spi_2021[
-        [
-            "Country",
-            "Code",
-            "Population",
-            "World region",
-            "Year",
-            "GDP pc",
-            "GNI pc",
-            "HDI",
-            "HDICode",
-            "Life expectancy",
-            "Wellbeing",
-            "Carbon footprint",
-            "HPI",
-            "SPI Score",
-            "Happiness Score",
-        ]
+def _(happy_spi):
+    happy_spi_c = happy_spi[
+        ~happy_spi["Country"].isin(
+            [
+                "Africa",
+                "Asia",
+                "Europe",
+                "North America",
+                "South America",
+                "Oceania",
+                "High-income countries",
+                "High-income countries",
+                "Low-income countries",
+                "Low-income countries",
+                "Lower-middle-income countries",
+                "Lower-middle-income countries",
+                "Upper-middle-income countries",
+                "Upper-middle-income countries",
+            ]
+        )
     ]
 
-    happy_spi_2021_c.to_csv("../../Data/happy_spi_2021.csv", index=False)
+    happy_spi_c[happy_spi.duplicated(subset=["Country", "Year"], keep=False)]
+    return (happy_spi_c,)
+
+
+@app.cell
+def _(pd):
+    working_hours = pd.read_csv("../../../Data/annual-working-hours-per-worker.csv")
+    working_hours.rename(columns={"Entity": "Country"}, inplace=True)
+    working_hours.sort_values("Year")
+    return (working_hours,)
+
+
+@app.cell
+def _(happy_spi_c, working_hours):
+    happy_work = happy_spi_c.merge(working_hours, on=["Country", "Year"], how="outer")
+    happy_work[["Country", "Code_x", "Code_y"]]
+    return (happy_work,)
+
+
+@app.cell
+def _(happy_work):
+    happy_work["Code_x"] = happy_work["Code_x"].combine_first(happy_work["Code_y"])
+    happy_work[["Country", "Code_x", "Code_y"]].isna().sum()
+    happy_work[["Country", "Year"]].duplicated().sum()
+    return
+
+
+@app.cell
+def _(happy_work):
+    # happy_work.drop(columns="Code_y", inplace=True)
+    # happy_work.rename(columns={"Code_x": "Code"}, inplace=True)
+    # happy_work.columns = happy_work.columns.str.replace("HPI", "Happy Planet Index")
+    happy_work.columns = happy_work.columns.str.replace(
+        "Global Social Progress Index", "Social Progress Index"
+    )
+    return
+
+
+@app.cell
+def _(happy_work):
+    happy_work.columns
     return
 
 
 @app.cell
 def _(pd):
-    # happy_spi_2021.to_csv("../../Data/happy_spi_2021.csv", index=False)
-    happy_spi_2021_n = pd.read_csv("../../Data/happy_spi_2021.csv")
-    happy_spi_2021_n.isna().sum()
-    return
+    hdi_all = pd.read_csv("../../../Data/HDI_all_time.csv", encoding="latin1", sep=";")
+    hdi_all
+    return (hdi_all,)
 
 
 @app.cell
-def _(pd):
-    happy_spi_2021_1 = pd.read_csv("../../Data/happy_spi_2021.csv")
-    happy_spi_2021_1
-    return (happy_spi_2021_1,)
+def _(happy_work, hdi_all):
+    hdi_work = hdi_all.merge(happy_work, on=["Country", "Year", "Code"], how="outer")
+    hdi_work
+    return (hdi_work,)
+
+
+@app.cell
+def _(hdi_work):
+    hdi_work.to_csv("../../../Data/social_indicies_combined/social_indicies_master_6.csv")
+    return
 
 
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
-    ## fixing nan
+    ## Fix missing Values
     """)
     return
 
 
 @app.cell
-def _(happy_spi_2021_1):
-    happy_spi_2021_1[happy_spi_2021_1["Country"].str.startswith("Central African")]
+def _(pd):
+    master = pd.read_csv("../../../Data/social_indicies_combined/social_indicies_master_6.csv")
+    master
+    return (master,)
+
+
+@app.cell
+def _(master, pd):
+    def find_best_data_year(df, target_col):
+        results = []
+        years = sorted(df["Year"].unique())
+
+        for year in years:
+            year_data = df[df["Year"] == year]
+            total_rows = len(year_data)
+            null_count = year_data[target_col].isna().sum()
+
+            # Calculate percentage of missing data
+            null_percentage = (null_count / total_rows) * 100 if total_rows > 0 else 100
+
+            results.append(
+                {
+                    "Year": year,
+                    "Missing_Values": null_count,
+                    "Total_Rows": total_rows,
+                    "Percent_Missing": round(null_percentage, 2),
+                }
+            )
+
+        table = pd.DataFrame(results)
+
+        # Now find the year with the lowest PERCENTAGE of missing values
+        # We also filter for Percent_Missing < 100 to ignore years where the column doesn't exist at all
+        valid_years = table[table["Percent_Missing"] < 100]
+
+        if valid_years.empty:
+            return table, "No years found with any data for this column."
+
+        best_years = valid_years[
+            valid_years["Percent_Missing"] == valid_years["Percent_Missing"].min()
+        ]
+
+        return table.sort_values("Percent_Missing"), best_years
+
+    find_best_data_year(master, "Happiness Score")
     return
 
 
 @app.cell
-def _(hdi):
-    hdi.head()
+def _(master):
+    master_2024 = master[master["Year"] == 2024]
+    master_2024.isna().sum()
     return
 
 
 @app.cell
-def _(hdi):
-    hdi[hdi["country"] == "Angola"]
+def _(master):
+    master.columns
     return
 
 
 @app.cell
-def _(happy_spi_2021_1):
-    # happy_spi_2021_1["Year"] = 2021
-    happy_spi_2021_1[happy_spi_2021_1["Code"].isna()]
+def _(pd):
+    def impute_closest_year(df, target_year, columns_to_fix):
+        # 1. Setup Audit Columns
+        for col in columns_to_fix:
+            audit_col = f"{col} Source Year"
+            if audit_col not in df.columns:
+                df[audit_col] = df["Year"]
+
+        # Identify countries with missing data in the target year
+        df_target = df[df["Year"] == target_year]
+        missing_mask = df_target[columns_to_fix].isna().any(axis=1)
+        countries_with_holes = df_target[missing_mask]["Country"].unique()
+
+        for country in countries_with_holes:
+            # Get all data for this country once to save time
+            country_data = df[df["Country"] == country]
+
+            for col in columns_to_fix:
+                val_mask = (df["Country"] == country) & (df["Year"] == target_year)
+
+                # Only proceed if the value is actually NaN
+                if pd.isna(df.loc[val_mask, col].values[0]):
+                    # Find all years where this specific column is NOT null
+                    available_data = country_data[country_data[col].notna()].copy()
+
+                    if not available_data.empty:
+                        # CALCULATE DISTANCE: |Year - Target|
+                        available_data["dist"] = (available_data["Year"] - target_year).abs()
+
+                        # Sort by distance (closest first)
+                        # If distance is equal (e.g., 2020 and 2022), it picks the first one
+                        best_match = available_data.sort_values("dist").iloc[0]
+
+                        # Apply the fix
+                        df.loc[val_mask, col] = best_match[col]
+                        df.loc[val_mask, f"{col} Source Year"] = best_match["Year"]
+
+        return df[df["Year"] == target_year]
+
+    return (impute_closest_year,)
+
+
+@app.cell
+def _(impute_closest_year, master):
+    happiness_imputed_2024 = impute_closest_year(
+        master,
+        2024,
+        [
+            "Happiness Score",
+            "GNI pc",
+            "GDP pc",
+            "Population",
+            "World region",
+            "Happy Planet Index Rank",
+            "Happy Planet Index Life Expectancy",
+            "Happy Planet Index Wellbeing",
+            "Happy Planet Index Footprint",
+            "Happy Planet Index",
+            "Happy Planet Index Change",
+            "Social Progress Index Score",
+            "Social Progress Index Rank",
+            "Working hours per worker",
+        ],
+    )
+    return (happiness_imputed_2024,)
+
+
+@app.cell
+def _(happiness_imputed_2024):
+    # happiness_imputed_2024["Happiness Score"].isna().sum()
+    happiness_imputed_2024.to_csv(
+        "../../../Data/social_indicies_combined/happiness_imputed_2023.csv"
+    )
     return
 
 
 @app.cell
-def _(happy_spi_2021_1):
-    happy_spi_2021_1.isna().sum()
+def _(happiness_imputed_2024):
+    # happiness_imputed_2024[~happiness_imputed_2024["Happiness Score"].isna()].isna().sum()
+    # (happiness_imputed_2024[~happiness_imputed_2024["Happiness Score"]
+    #                     .isna()][happiness_imputed_2024["HDI"]
+    #                                 .isna()].Country.tolist())
+    happiness_imputed_2024[happiness_imputed_2024["Happiness Score"].isna()]
+    happiness_imputed_2024[happiness_imputed_2024["HDI"].isna()]
+    happiness_imputed_2024[happiness_imputed_2024["Code"].isna()]
     return
 
 
 @app.cell
-def _(happy_spi_2021_1):
-    happy_spi_2021_2 = happy_spi_2021_1.copy()
-    happy_spi_2021_2 = happy_spi_2021_2.fillna(0)
-    return (happy_spi_2021_2,)
+def _():
+    continents = [
+        "Africa",
+        "Asia",
+        "Europe",
+        "North America",
+        "South America",
+        "Oceania",
+        "High-income countries",
+        "High-income countries",
+        "Low-income countries",
+        "Low-income countries",
+        "Lower-middle-income countries",
+        "Lower-middle-income countries",
+        "Upper-middle-income countries",
+        "Upper-middle-income countries",
+        #   "Bolivia",
+        #   "Cote d'Ivoire",
+        # "Democratic Republic of Congo",
+        #   "Eswatini",
+        #   "Hong Kong",
+        #   "Iran",
+        #   "Kosovo",
+        #   "Laos",
+        #   "Moldova",
+        #   "Palestine",
+        #   "Puerto Rico",
+        #   "Russia",
+        #   "South Korea",
+        #   "Syria",
+        #   "Taiwan",
+        #   "Tanzania",
+        #   "Turkey",
+        #   "Venezuela",
+        #   "Vietnam"
+    ]
+    return (continents,)
 
 
 @app.cell
-def _(happy_spi_2021_2):
+def _(master_2):
+    master_2[master_2["Country"] == "Bahamas"]
+    return
+
+
+@app.cell
+def _(continents, happiness_imputed_2023):
+    df_wc = happiness_imputed_2023[~happiness_imputed_2023["Country"].isin(continents)]
+    # df_wc.isna().sum()
+    df_wc[["Country", "Happiness Score"]]
+    return (df_wc,)
+
+
+@app.cell
+def _(df_wc):
+    df_d = df_wc.dropna(subset="Happiness Score")
+    df_d.isna().sum()
+    return (df_d,)
+
+
+@app.cell
+def _(pd):
+    # df_d.to_csv("../../../Data/social_indicies_combined/social_indicies_master_imputed.csv")
+    df_2023 = pd.read_csv(
+        "../../../Data/social_indicies_combined/social_indicies_master_imputed.csv"
+    )
+    return (df_2023,)
+
+
+@app.cell
+def _(df_2023):
+    df_2023
+    return
+
+
+@app.cell
+def _(df_2023):
+    # df_2023.loc[df_2023["Country"] == "Syria", "Region"] = "AS"
+    # df_2023.loc[df_2023["Country"] == "Syria", "World region"] = "Asia"
+    # df_2023.loc[df_2023["Country"] == "Syria"]
+    # df_2023.isna().sum()
+    df_2023[df_2023["HDI"].isna()]["Country"].to_list()
+    # df_2023[df_2023["Country"]=="Spain"]
+    return
+
+
+@app.cell
+def _(df_2023):
+    df_2023[df_2023["Country"].str.contains("Türkiye")]
+    return
+
+
+@app.cell
+def _(df_d):
+    import seaborn as sns
+
+    sns.jointplot(df_d, x="HPI Life Expectancy", y="Happiness Score", color="#4CB391")
+    # df_d.plot(kind="scatter", x="GDP pc", y="Happiness Score")
+    return
+
+
+@app.cell
+def _(df_d):
+    df_d.columns
+    return
+
+
+@app.cell
+def _(df_d):
     import altair as alt
 
     hover = alt.selection_point(on="mouseover", nearest=True, fields=["Country"], empty=False)
     column_options = [
-        "GDP pc",
-        "GNI pc",
         "HDI",
-        "HDICode",
-        "Life Expectancy",
-        "Wellbeing",
-        "Carbon Footprint",
-        "HPI score",
+        "GNI pc",
+        "GDP pc",
+        "HPI",
+        "HPI Life Expectancy",
+        "HPI Wellbeing",
+        "HPI Footprint",
         "SPI Score",
+        "SPI Rank",
+        "Working hours per worker",
     ]
-    dropdown = alt.binding_select(options=column_options, name="Choose Wealth Metric: ")
+    dropdown = alt.binding_select(
+        options=column_options, name="Choose an index to plot against vs. the Happiness Score: "
+    )
     select_var = alt.selection_point(
         fields=["column"],
         bind=dropdown,
@@ -357,19 +691,20 @@ def _(happy_spi_2021_2):
         name="Selection",
         toggle=False,
     )
+    df_d_clean = df_d.dropna(subset=column_options)
     chart = (
-        alt.Chart(happy_spi_2021_2)
+        alt.Chart(df_d_clean)
         .transform_fold(column_options, as_=["column", "value"])
-        .transform_filter("datum.value > 0")
+        .transform_filter("isValid(datum.value)")
         .transform_filter(select_var)
         .mark_point(filled=True, size=100)
         .encode(
-            x=alt.X(
+            y=alt.Y(
                 "Happiness Score:Q",
                 axis=alt.Axis(format=".1f", tickCount=5, labelFontSize=14, titleFontSize=16),
                 scale=alt.Scale(zero=False),
             ),
-            y=alt.Y(
+            x=alt.X(
                 "value:Q",
                 scale=alt.Scale(zero=False, padding=5),
                 title="Wealth Metric",
@@ -450,13 +785,24 @@ def _(happy_spi_2021_2):
         .add_params(hover)
         .configure_view(strokeOpacity=0.2)
     )
-    # 1. Define the variables you want to switch between
-    # 2. Create the dropdown menu
-    # 3. Create the parameter that tracks the selection
-    # 'value' sets the default starting position
-    # 4. Build the chart
-    # chart.save('chart_spec.json')
-    chart  # "Fold" (melt) these columns  # into two new columns: 'column' (name) and 'value' (number)  # Removes any rows where the metric is missing/zero  # Filter the data to show only the selected "column"  # color='Happiness Score:Q',  # 1. This is the "detach" command  # 2. X position (pixels from left)  # 3. Y position (pixels from top)  # 4. Makes the box visible  # strokeColor='gray',  # labelBaseline='top',  # Makes it a bit wider/readable  # Main title size  # Subtitle size
+
+    chart
+    return (chart,)
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    ## Export
+    """)
+    return
+
+
+@app.cell
+def _(chart):
+    import json
+
+    chart.save("../../../Websites/MaCoZu/src/components/Charts/HappinessVega/chart_spec.json")
     return
 
 
@@ -467,6 +813,11 @@ def _():
 
 @app.cell
 def _():
+    # stable_cols = ["Code", "World region"]
+
+    # happy_spi_sorted = happy_spi_s.sort_values(["Country", "Year"])
+    # happy_spi_sorted[stable_cols] = happy_spi_sorted.groupby("Country")[stable_cols].ffill().bfill()
+    # happy_spi_sorted
     return
 
 
