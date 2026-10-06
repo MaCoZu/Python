@@ -17,10 +17,10 @@ lint:  ## Check code with ruff (no fixes)
 	uv run ruff check .
 
 type:  ## Run mypy type checking
-	uv run mypy utils/ tests/
+	uv run mypy SRC/utils/ TESTS/
 
 test:  ## Run pytest tests
-	uv run pytest tests/ -v
+	uv run pytest TESTS/ -v
 
 clean:  ## Remove cache and temp files
 	find . -type d -name "__pycache__" -exec rm -rf {} + 2>/dev/null || true

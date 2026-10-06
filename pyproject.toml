@@ -82,9 +82,10 @@ warn_return_any = true
 warn_unreachable = true
 show_error_codes = true
 ignore_missing_imports = true
+explicit_package_bases = true
 
 [[tool.mypy.overrides]]
-module = "tests.*"
+module = "TESTS.*"
 disallow_untyped_defs = false
 disable_error_code = ["misc"]
 
@@ -97,7 +98,7 @@ module = "utils.*"
 disallow_untyped_defs = true
 
 [tool.pytest.ini_options]
-testpaths = ["tests"]
+testpaths = ["TESTS"]
 python_files = ["test_*.py"]
 python_functions = ["test_*"]
 addopts = ["-v", "--strict-markers", "--tb=short"]
