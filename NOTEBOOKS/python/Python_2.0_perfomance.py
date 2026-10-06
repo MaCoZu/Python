@@ -428,9 +428,9 @@ print(end - start)
 # PyInstrument is a Python profiler that helps you identifing where most of the execution time is spent, allowing you to focus on improving those areas.
 # from pyinstrument import Profiler
 
-profiler = Profiler()
-profiler.start()
-# code you want to measure
-profiler.stop()
-print(profiler.output_text(unicode=True, color=True))
-print(profiler.output_text(unicode=True, color=True))
+# profiler = Profiler()
+# profiler.start()
+# # code you want to measure
+# profiler.stop()
+# print(profiler.output_text(unicode=True, color=True))
+# print(profiler.output_text(unicode=True, color=True))
