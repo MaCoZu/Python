@@ -170,6 +170,8 @@ uv.lock
 
 # Ruff
 .ruff_cache/
+git-error-*
+
 
 # Jupyter checkpoints
 .ipynb_checkpoints/
